@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+  inheritAttrs: false,
   name: 'CssGroup',
   props: ['name']
 }

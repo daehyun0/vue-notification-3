@@ -50,7 +50,7 @@
 <script>
 import plugin                         from './index'
 import { events }                     from './events'
-import { Id, split, listToDirection, Timer } from './util'
+import { Id, listToDirection, Timer } from './util'
 import defaults                       from './defaults'
 import VelocityGroup                  from './VelocityGroup.vue'
 import CssGroup                       from './CssGroup.vue'
@@ -164,8 +164,8 @@ const Component = {
     }
   },
   mounted () {
-    events.$on('add', this.addItem);
-    events.$on('close', this.closeItem);
+    events.on('add', this.addItem);
+    events.on('close', this.closeItem);
   },
   computed: {
     actualWidth () {
@@ -282,7 +282,9 @@ const Component = {
 
       const canAdd = ignoreDuplicates ? !isDuplicate : true;
 
-      if (!canAdd) return;
+      if (!canAdd) {
+        return;
+      }
 
       if (direction) {
         this.list.push(item)
@@ -352,7 +354,7 @@ const Component = {
         : animation
     },
 
-    enter ({ el, complete }) {
+    enter (el, complete) {
       const animation = this.getAnimation('enter', el)
 
       this.velocity(el, animation, {
@@ -361,7 +363,7 @@ const Component = {
       })
     },
 
-    leave ({ el, complete }) {
+    leave (el, complete) {
       let animation = this.getAnimation('leave', el)
 
       this.velocity(el, animation, {
@@ -398,15 +400,15 @@ export default Component
 }
 
 .vue-notification-template {
-  display: block;	
-  box-sizing: border-box;	
-  background: white;	
-  text-align: left;	
+  display: block;
+  box-sizing: border-box;
+  background: white;
+  text-align: left;
 }
 
 .vue-notification {
   display: block;
-  box-sizing: border-box;  
+  box-sizing: border-box;
   text-align: left;
   font-size: 12px;
   padding: 10px;

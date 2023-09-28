@@ -1,4 +1,5 @@
-import { openBlock as a, createBlock as h, TransitionGroup as b, withCtx as g, renderSlot as v, createElementBlock as p, normalizeStyle as E, resolveDynamicComponent as w, Fragment as O, renderList as S, normalizeClass as A, createElementVNode as D, createCommentVNode as k } from "vue";
+(function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".vue-notification-group{display:block;position:fixed;z-index:5000}.vue-notification-wrapper{display:block;overflow:hidden;width:100%;margin:0;padding:0}.notification-title{font-weight:600}.vue-notification-template{display:block;box-sizing:border-box;background:white;text-align:left}.vue-notification{display:block;box-sizing:border-box;text-align:left;font-size:12px;padding:10px;margin:0 5px 5px;color:#fff;background:#44A4FC;border-left:5px solid #187FE7}.vue-notification.warn{background:#ffb648;border-left-color:#f48a06}.vue-notification.error{background:#E54D42;border-left-color:#b82e24}.vue-notification.success{background:#68CD86;border-left-color:#42a85f}.vn-fade-enter-active,.vn-fade-leave-active,.vn-fade-move{transition:all .5s}.vn-fade-enter,.vn-fade-leave-to{opacity:0}")),document.head.appendChild(e)}}catch(o){console.error("vite-plugin-css-injected-by-js",o)}})();
+import { openBlock as a, createBlock as y, TransitionGroup as N, withCtx as g, renderSlot as v, createElementBlock as p, normalizeStyle as A, resolveDynamicComponent as w, Fragment as O, renderList as S, normalizeClass as E, createElementVNode as D, createCommentVNode as k } from "vue";
 function I(t) {
   return { all: t = t || /* @__PURE__ */ new Map(), on: function(e, i) {
     var n = t.get(e);
@@ -15,14 +16,14 @@ function I(t) {
     });
   } };
 }
-const f = I(), x = {
+const f = I(), b = {
   x: ["left", "center", "right"],
   y: ["top", "bottom"]
 }, B = ((t) => () => t++)(0), H = (t) => typeof t != "string" ? [] : t.split(/\s+/gi).filter((e) => e), R = (t) => {
   typeof t == "string" && (t = H(t));
   let e = null, i = null;
   return t.forEach((n) => {
-    x.y.indexOf(n) !== -1 && (i = n), x.x.indexOf(n) !== -1 && (e = n);
+    b.y.indexOf(n) !== -1 && (i = n), b.x.indexOf(n) !== -1 && (e = n);
   }), { x: e, y: i };
 };
 function G(t, e, i) {
@@ -58,10 +59,10 @@ const m = {
   name: "VelocityGroup",
   methods: {
     enter(t, e) {
-      this.$emit("enter", { el: t, complete: e });
+      this.$emit("enter", t, e);
     },
     leave(t, e) {
-      this.$emit("leave", { el: t, complete: e });
+      this.$emit("leave", t, e);
     },
     afterLeave() {
       this.$emit("afterLeave");
@@ -69,7 +70,7 @@ const m = {
   }
 };
 function V(t, e, i, n, o, r) {
-  return a(), h(b, {
+  return a(), y(N, {
     css: !1,
     onEnter: r.enter,
     onLeave: r.leave,
@@ -82,25 +83,26 @@ function V(t, e, i, n, o, r) {
   }, 8, ["onEnter", "onLeave", "onAfterLeave"]);
 }
 const W = /* @__PURE__ */ T(M, [["render", V]]), Y = {
+  inheritAttrs: !1,
   name: "CssGroup",
   props: ["name"]
 };
 function j(t, e, i, n, o, r) {
-  return a(), h(b, { name: i.name }, {
+  return a(), y(N, { name: i.name }, {
     default: g(() => [
       v(t.$slots, "default")
     ]),
     _: 3
   }, 8, ["name"]);
 }
-const z = /* @__PURE__ */ T(Y, [["render", j]]), y = "[-+]?[0-9]*.?[0-9]+", N = [
+const z = /* @__PURE__ */ T(Y, [["render", j]]), h = "[-+]?[0-9]*.?[0-9]+", x = [
   {
     name: "px",
-    regexp: new RegExp(`^${y}px$`)
+    regexp: new RegExp(`^${h}px$`)
   },
   {
     name: "%",
-    regexp: new RegExp(`^${y}%$`)
+    regexp: new RegExp(`^${h}%$`)
   },
   /**
    * Fallback option
@@ -108,7 +110,7 @@ const z = /* @__PURE__ */ T(Y, [["render", j]]), y = "[-+]?[0-9]*.?[0-9]+", N = 
    */
   {
     name: "px",
-    regexp: new RegExp(`^${y}$`)
+    regexp: new RegExp(`^${h}$`)
   }
 ];
 var F = (t) => {
@@ -117,8 +119,8 @@ var F = (t) => {
       type: t,
       value: 0
     };
-  for (var e = 0; e < N.length; e++) {
-    let i = N[e];
+  for (var e = 0; e < x.length; e++) {
+    let i = x[e];
     if (i.regexp.test(t))
       return {
         type: i.name,
@@ -229,7 +231,7 @@ const d = {
     };
   },
   mounted() {
-    f.$on("add", this.addItem), f.$on("close", this.closeItem);
+    f.on("add", this.addItem), f.on("close", this.closeItem);
   },
   computed: {
     actualWidth() {
@@ -320,14 +322,14 @@ const d = {
       const i = this.animation[t];
       return typeof i == "function" ? i.call(this, e) : i;
     },
-    enter({ el: t, complete: e }) {
+    enter(t, e) {
       const i = this.getAnimation("enter", t);
       this.velocity(t, i, {
         duration: this.speed,
         complete: e
       });
     },
-    leave({ el: t, complete: e }) {
+    leave(t, e) {
       let i = this.getAnimation("leave", t);
       this.velocity(t, i, {
         duration: this.speed,
@@ -342,9 +344,9 @@ const d = {
 function Z(t, e, i, n, o, r) {
   return a(), p("div", {
     class: "vue-notification-group",
-    style: E(t.styles)
+    style: A(t.styles)
   }, [
-    (a(), h(w(t.componentName), {
+    (a(), y(w(t.componentName), {
       name: t.animationName,
       onEnter: t.enter,
       onLeave: t.leave,
@@ -353,19 +355,19 @@ function Z(t, e, i, n, o, r) {
       default: g(() => [
         (a(!0), p(O, null, S(t.active, (s) => (a(), p("div", {
           class: "vue-notification-wrapper",
-          style: E(t.notifyWrapperStyle(s)),
+          style: A(t.notifyWrapperStyle(s)),
           key: s.id,
           "data-id": s.id,
           onMouseenter: e[0] || (e[0] = (...l) => t.pauseTimeout && t.pauseTimeout(...l)),
           onMouseleave: e[1] || (e[1] = (...l) => t.resumeTimeout && t.resumeTimeout(...l))
         }, [
           v(t.$slots, "body", {
-            class: A([t.classes, s.type]),
+            class: E([t.classes, s.type]),
             item: s,
             close: () => t.destroy(s)
           }, () => [
             D("div", {
-              class: A(t.notifyClass(s)),
+              class: E(t.notifyClass(s)),
               onClick: (l) => t.destroyIfNecessary(s)
             }, [
               s.title ? (a(), p("div", {
@@ -397,7 +399,7 @@ const tt = /* @__PURE__ */ T(J, [["render", Z]]), et = {
       f.emit("close", o);
     };
     const n = e.name || "notify";
-    t.prototype["$" + n] = i, t[n] = i;
+    t.config.globalProperties["$" + n] = i, t[n] = i;
   }
 };
 export {
