@@ -1,13 +1,10 @@
 {
   "presets": [
-    ["latest", {
-      "es2015": { "modules": false }
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 7"]
+      }
     }]
   ],
-  "env": {
-    "test": {
-      "presets": ["env", "stage-2"],
-    }
-  },
   "comments": false
 }
